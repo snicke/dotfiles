@@ -5,8 +5,10 @@
 
 " Make Vim more useful
 set nocompatible
+" Map escape to ff
+inoremap ff <esc>
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
+" set clipboard=unnamed
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode
@@ -25,8 +27,8 @@ let mapleader=","
 " set binary
 " set noeol
 " Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+" set backupdir=~/.vim/backups
+" set directory=~/.vim/swaps
 if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
