@@ -1,70 +1,106 @@
-" Colors {{{
-syntax enable           " enable syntax processing
 " Use the Solarized Dark theme
-" set background=dark
-" colorscheme solarized
-" let g:solarized_termtrans=1
-" }}}
+set background=dark
+colorscheme solarized
+let g:solarized_termtrans=1
 
-" Misc {{{
-set ttyfast                     " faster redraw
-set backspace=indent,eol,start
-" }}}
-
-" Spaces & Tabs {{{
-set tabstop=4           " 4 space tab
-set expandtab           " use spaces for tabs
-set softtabstop=4       " 4 space tab
-set shiftwidth=4
-set modelines=1
-filetype indent on
-filetype plugin on
-set autoindent
-" }}}
-
-" UI Layout {{{
-set number              " show line numbers
-set showcmd             " show command in bottom bar
-set nocursorline        " highlight current line
+" Make Vim more useful
+set nocompatible
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+" Enhance command-line completion
 set wildmenu
-set showmatch           " higlight matching parenthesis
-" }}}
-
-" Searching {{{
-set ignorecase          " ignore case when searching
-set incsearch           " search as characters are entered
-set hlsearch            " highlight all matches
-" }}}
-
-" Folding {{{
-"=== folding ===
-set foldmethod=indent   " fold based on indent level
-set foldnestmax=10      " max 10 depth
-set foldenable          " don't fold files by default on open
-nnoremap <space> za
-set foldlevelstart=10    " start with fold level of 1
-" }}}
-
-" Line Shortcuts {{{
-nnoremap j gj
-nnoremap k gk
-nnoremap B ^
-nnoremap E $
-" }}}
-
-" Leader Shortcuts {{{
+" Allow cursor keys in insert mode
+set esckeys
+" Allow backspace in insert mode
+set backspace=indent,eol,start
+" Optimize for fast terminal connections
+set ttyfast
+" Add the g flag to search/replace by default
+set gdefault
+" Use UTF-8 without BOM
+set encoding=utf-8 nobomb
+" Change mapleader
 let mapleader=","
-" }}}
-
-" Backups {{{
-set backup 
+" Don’t add empty newlines at the end of files
+set binary
+set noeol
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
-set writebackup
-" }}}
 
-vim:foldmethod=marker:foldlevel=0
+" Don’t create backups when editing files in certain directories
+set backupskip=/tmp/*,/private/tmp/*
+
+" Respect modeline in files
+set modeline
+set modelines=4
+" Enable per-directory .vimrc files and disable unsafe commands in them
+set exrc
+set secure
+" Enable line numbers
+set number
+" Enable syntax highlighting
+syntax on
+" Highlight current line
+set cursorline
+" Make tabs as wide as two spaces
+set tabstop=2
+" Show “invisible” characters
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set list
+" Highlight searches
+set hlsearch
+" Ignore case of searches
+set ignorecase
+" Highlight dynamically as pattern is typed
+set incsearch
+" Always show status line
+set laststatus=2
+" Enable mouse in all modes
+set mouse=a
+" Disable error bells
+set noerrorbells
+" Don’t reset cursor to start of line when moving around.
+set nostartofline
+" Show the cursor position
+set ruler
+" Don’t show the intro message when starting Vim
+set shortmess=atI
+" Show the current mode
+set showmode
+" Show the filename in the window titlebar
+set title
+" Show the (partial) command as it’s being typed
+set showcmd
+" Use relative line numbers
+if exists("&relativenumber")
+	set relativenumber
+	au BufReadPost * set relativenumber
+endif
+" Start scrolling three lines before the horizontal window border
+set scrolloff=3
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+	let save_cursor = getpos(".")
+	let old_query = getreg('/')
+	:%s/\s\+$//e
+	call setpos('.', save_cursor)
+	call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
+" Save a file as root (,W)
+noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
+" Automatic commands
+if has("autocmd")
+	" Enable file type detection
+	filetype on
+	" Treat .json files as .js
+	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+	" Treat .md files as Markdown
+	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+endif
