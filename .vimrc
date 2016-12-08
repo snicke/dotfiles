@@ -25,6 +25,8 @@ set gdefault
 set encoding=utf-8 nobomb
 " Change mapleader
 let mapleader=","
+" Deselect search matches
+map <Leader><Space> :noh<CR>
 " Don’t add empty newlines at the end of files
 " set binary
 " set noeol
