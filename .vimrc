@@ -8,7 +8,9 @@ syntax enable
 " Make Vim more useful
 set nocompatible
 " Map escape to ff
-noremap ff <esc>
+nnoremap ff <esc>
+inoremap ff <esc>
+vnoremap ff <esc>
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 " set clipboard=unnamed
 " Enhance command-line completion
