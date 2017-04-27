@@ -1,8 +1,13 @@
 execute pathogen#infect()
+"set termguicolors
+"set term=screen-256color
+"set t_ut=
+"let g:solarized_termcolors=256
+"set t_Co=256
 " Use the Solarized Dark theme
 syntax enable
  set background=dark
- colorscheme solarized
+ colorscheme monokai
 " let g:solarized_termtrans=1
 
 " Make Vim more useful
