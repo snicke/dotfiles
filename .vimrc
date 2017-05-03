@@ -7,10 +7,9 @@ syntax enable
 
 " Make Vim more useful
 set nocompatible
-" Map escape to ff
-nnoremap ff <esc>
-inoremap ff <esc>
-vnoremap ff <esc>
+" Map escape to jj
+inoremap jj <esc>
+vnoremap jj <esc>
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 " set clipboard=unnamed
 " Enhance command-line completion
